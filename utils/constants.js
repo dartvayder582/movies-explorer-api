@@ -9,7 +9,7 @@ const celebrateConfig = {
 };
 
 const regexLink = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/;
-const regexName = /^[\p{L}\-'\s]+$/;
+const regexName = /^[\p{L}\-'\s]+$/u;
 
 module.exports = {
   celebrateConfig,
