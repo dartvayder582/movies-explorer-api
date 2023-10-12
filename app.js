@@ -16,7 +16,9 @@ const { corsConfig } = require('./utils/corsConfig');
 const { celebrateConfig } = require('./utils/constants');
 const { limiterConfig } = require('./utils/rateLimiterConfig');
 
-const { PORT, DB_ADDRESS } = process.env;
+// const { PORT, DB_ADDRESS } = process.env;
+// for dev
+const { PORT, DB_ADDRESS } = require('./utils/devConfig');
 
 mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,

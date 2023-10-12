@@ -6,9 +6,11 @@ const {
   UserExistError,
   NotAuthError,
 } = require('../errors');
-const { resTemplate } = require('../utils/constants');
+const { resTemplate, userMessage } = require('../utils/constants');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+// const { NODE_ENV, JWT_SECRET } = process.env;
+// for dev
+const { NODE_ENV, JWT_SECRET } = require('../utils/devConfig');
 
 // signup
 const createUser = (req, res, next) => {
@@ -29,7 +31,7 @@ const createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        return next(new UserExistError('Пользователь с таким e-mail уже существует'));
+        return next(new UserExistError(userMessage.conflict));
       }
       return next(err);
     });
@@ -55,7 +57,7 @@ const login = (req, res, next) => {
         .send(resTemplate(user));
     })
     .catch(() => {
-      next(new NotAuthError('Неправильные почта или пароль'));
+      next(new NotAuthError(userMessage.incorrectLoginData));
     });
 };
 
@@ -67,7 +69,7 @@ const logout = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
       })
-      .send({ message: 'Вы успешно вышли' });
+      .send({ message: userMessage.logout });
   }
   return next();
 };
@@ -90,11 +92,16 @@ const updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Запрашиваемый пользователь не найден');
+        throw new NotFoundError(userMessage.notFound);
       }
       return res.send(user);
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.code === 11000) {
+        return next(new UserExistError(userMessage.conflict));
+      }
+      return next(err);
+    });
 };
 
 module.exports = {

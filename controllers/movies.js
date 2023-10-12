@@ -4,8 +4,9 @@ const {
   BadRequestError,
   ForbiddenError,
 } = require('../errors');
+const { movieMessage } = require('../utils/constants');
 
-const getMovies = (req, res, next) => Movies.find({})
+const getMovies = (req, res, next) => Movies.find({ owner: req.user._id })
   .sort('-createdAt')
   .then((movies) => res.send(movies))
   .catch(next);
@@ -51,16 +52,16 @@ const deleteMovie = (req, res, next) => {
   return Movies.findById(_id)
     .then((checkMovie) => {
       if (!checkMovie) {
-        throw new NotFoundError('Запрашиваемый фильм не найден');
+        throw new NotFoundError(movieMessage.notFound);
       } else if (checkMovie.owner.toString() !== req.user._id) {
-        throw new ForbiddenError('Вы не можете удалить сохранённый фильм из профиля другого пользователя');
+        throw new ForbiddenError(movieMessage.forbidden);
       }
 
       return Movies.deleteOne(checkMovie)
-        .then(() => res.send({ message: 'Фильм удален' }))
+        .then(() => res.send({ message: movieMessage.deleted }))
         .catch((err) => {
           if (err.name === 'CastError') {
-            return next(new BadRequestError('Некорректный id фильма'));
+            return next(new BadRequestError(movieMessage.incorrectId));
           }
           return next(err);
         });
