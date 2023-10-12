@@ -40,11 +40,11 @@ app.use(requestLogger);
 app.use(rateLimit(limiterConfig));
 
 // crash-test
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+// app.get('/crash-test', () => {
+//   setTimeout(() => {
+//     throw new Error('Сервер сейчас упадёт');
+//   }, 0);
+// });
 
 // auth and routes
 app.use(routes);
