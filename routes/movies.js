@@ -1,12 +1,13 @@
 const router = require('express').Router();
-const { addMovieValidation, movieIdValidation } = require('../utils/validationConfig');
+const {
+  addMovieValidation,
+  movieIdValidation,
+} = require('../utils/validationConfig');
 
 const {
   getMovies,
   addMovie,
   deleteMovie,
-  // addLikeCard,
-  // deleteLikeCard,
 } = require('../controllers/movies');
 
 router.get('/', getMovies);
@@ -20,15 +21,5 @@ router.delete(
   movieIdValidation,
   deleteMovie,
 );
-// router.put(
-//   '/:cardId/likes',
-//   cardIdValidation,
-//   addLikeCard,
-// );
-// router.delete(
-//   '/:cardId/likes',
-//   cardIdValidation,
-//   deleteLikeCard,
-// );
 
 module.exports = router;

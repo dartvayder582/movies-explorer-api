@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const { default: isURL } = require('validator/lib/isURL');
 const { regexLink } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
@@ -39,7 +38,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => regexLink.test(v), // или воспользоваться внутренним методом isURL
+      validator: (v) => regexLink.test(v),
     },
   },
   owner: {
@@ -51,20 +50,16 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => regexLink.test(v), // или воспользоваться внутренним методом isURL
+      validator: (v) => regexLink.test(v),
     },
   },
   image: {
     type: String,
     required: true,
     validate: {
-      validator: (v) => regexLink.test(v), // или воспользоваться внутренним методом isURL
+      validator: (v) => regexLink.test(v),
     },
   },
-  // likes: {
-  //   type: [mongoose.Schema.Types.ObjectId],
-  //   default: [],
-  // },
   createdAt: {
     type: Date,
     default: Date.now,

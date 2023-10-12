@@ -68,34 +68,8 @@ const deleteMovie = (req, res, next) => {
     .catch(next);
 };
 
-// const handleLikeCard = (req, res, next, method) => {
-//   Cards.findByIdAndUpdate(
-//     req.params.cardId,
-//     { [method]: { likes: req.user._id } },
-//     { new: true },
-//   )
-//     .then((card) => {
-//       if (!card) {
-//         throw new NotFoundError('Запрашиваемая карточка не найдена');
-//       }
-//       return res.send(card);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         return next(new BadRequestError('Переданы некорректные данные'));
-//       }
-//       return next(err);
-//     });
-// };
-
-// const addLikeCard = (req, res, next) => handleLikeCard(req, res, next, '$addToSet');
-
-// const deleteLikeCard = (req, res, next) => handleLikeCard(req, res, next, '$pull');
-
 module.exports = {
   getMovies,
   addMovie,
   deleteMovie,
-  // addLikeCard,
-  // deleteLikeCard,
 };

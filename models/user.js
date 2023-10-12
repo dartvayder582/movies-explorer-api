@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const isEmail = require('validator/lib/isEmail');
-// const { default: isURL } = require('validator/lib/isURL');
-// const { regexLink } = require('../utils/constants');
+const { regexName } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -11,7 +10,7 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     validate: {
-      validator: (v) => /^[\p{L}\-'\s]+$/u.test(v),
+      validator: (v) => regexName.test(v),
     },
   },
   email: {

@@ -72,23 +72,6 @@ const logout = (req, res, next) => {
   return next();
 };
 
-// const getUsers = (req, res, next) => Users.find({})
-//   .then((users) => res.send(users))
-//   .catch(next);
-
-// const getUserById = (req, res, next) => {
-//   const { userId } = req.params;
-
-//   return Users.findById(userId)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NotFoundError('Запрашиваемый пользователь не найден');
-//       }
-//       return res.send(resTemplate(user));
-//     })
-//     .catch(next);
-// };
-
 // user info
 const getCurrentUser = (req, res, next) => Users.findById(req.user._id)
   .then((userData) => res.send(resTemplate(userData)))
@@ -117,8 +100,6 @@ const updateUser = (req, res, next) => {
 module.exports = {
   login,
   logout,
-  // getUsers,
-  // getUserById,
   createUser,
   updateUser,
   getCurrentUser,

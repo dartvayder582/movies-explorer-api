@@ -16,9 +16,9 @@ const { corsConfig } = require('./utils/corsConfig');
 const { celebrateConfig } = require('./utils/constants');
 const { limiterConfig } = require('./utils/rateLimiterConfig');
 
-const { PORT } = process.env;
+const { PORT, DB_ADDRESS } = process.env;
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
+mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
 });
 
@@ -26,8 +26,9 @@ const app = express();
 
 app.use(cors(corsConfig));
 
-// security and validation ПЕРЕДЕЛАТЬ!!!!
+// security
 app.use(helmet());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

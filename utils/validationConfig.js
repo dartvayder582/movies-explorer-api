@@ -1,7 +1,7 @@
 const { celebrate, Joi } = require('celebrate');
 const { regexLink } = require('./constants');
 
-// card validation
+// movie validation
 const addMovieValidation = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
@@ -25,25 +25,12 @@ const movieIdValidation = celebrate({
 });
 
 // user validation
-
-// const userIdValidation = celebrate({
-//   params: Joi.object().keys({
-//     userId: Joi.string().hex().length(24),
-//   }),
-// });
-
 const userInfoValidation = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
   }),
 });
-
-// const userAvatarValidation = celebrate({
-//   body: Joi.object().keys({
-//     avatar: Joi.string().required().regex(regexLink),
-//   }),
-// });
 
 // auth validation
 const signupValidation = celebrate({
@@ -64,9 +51,7 @@ const signinValidation = celebrate({
 module.exports = {
   addMovieValidation,
   movieIdValidation,
-  // userIdValidation,
   userInfoValidation,
-  // userAvatarValidation,
   signupValidation,
   signinValidation,
 };
