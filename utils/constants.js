@@ -9,10 +9,18 @@ const celebrateConfig = {
 };
 
 // response messages
-const userMessage = {
+const generalMessage = {
+  routeNotFound: 'Ресурс не найден',
+  serverError: 'На сервере произошла ошибка',
+};
+const authMessage = {
+  required: 'Необходима авторизация',
   conflict: 'Пользователь с таким e-mail уже существует',
   incorrectLoginData: 'Неправильные почта или пароль',
   logout: 'Вы успешно вышли',
+};
+const userMessage = {
+  conflict: 'Пользователь с таким e-mail уже существует',
   notFound: 'Запрашиваемый пользователь не найден',
 };
 const movieMessage = {
@@ -32,4 +40,6 @@ module.exports = {
   regexName,
   movieMessage,
   userMessage,
+  authMessage,
+  generalMessage,
 };

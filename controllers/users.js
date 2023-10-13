@@ -6,11 +6,9 @@ const {
   UserExistError,
   NotAuthError,
 } = require('../errors');
-const { resTemplate, userMessage } = require('../utils/constants');
+const { resTemplate, userMessage, authMessage } = require('../utils/constants');
 
-// const { NODE_ENV, JWT_SECRET } = process.env;
-// for dev
-const { NODE_ENV, JWT_SECRET } = require('../utils/devConfig');
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 // signup
 const createUser = (req, res, next) => {
@@ -57,7 +55,7 @@ const login = (req, res, next) => {
         .send(resTemplate(user));
     })
     .catch(() => {
-      next(new NotAuthError(userMessage.incorrectLoginData));
+      next(new NotAuthError(authMessage.incorrectLoginData));
     });
 };
 
@@ -69,7 +67,7 @@ const logout = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
       })
-      .send({ message: userMessage.logout });
+      .send({ message: authMessage.logout });
   }
   return next();
 };
