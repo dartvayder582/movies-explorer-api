@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const routes = require('./routes/index');
 const handleErrors = require('./middlewares/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { corsConfig } = require('./utils/corsConfig');
+// const { corsConfig } = require('./utils/corsConfig');
 const { celebrateConfig } = require('./utils/constants');
 const { limiterConfig } = require('./utils/rateLimiterConfig');
 
@@ -26,7 +26,10 @@ mongoose.connect(DB_ADDRESS, {
 
 const app = express();
 
-app.use(cors(corsConfig));
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3001', 'https://movie.finder.nomoredomainsrocks.ru'],
+}));
 
 // security
 app.use(helmet());
