@@ -7,6 +7,6 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.108.8
+IP-адрес: 158.160.26.103
 
-Backend https://api.movie.finder.nomoredomainsrocks.ru
+Backend: https://api.movie.finder.nomoredomainsrocks.ru
